@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>List of cooking oils</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body style="background-color: #171717; color: whitesmoke; background-image: url(/img/backgroundPhoto.png);">
+	<h1>Cooking oils</h1>
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	
+	
+    <table class="table table-dark table-hover">
+		<tr>
+		    <th>Name</th>
+		    <th>Manufacturer</th>
+		    <th>Volume</th>
+		    <th>Country of Origin</th>
+		    <th>Rate</th>
+		    <th>Commentary</th>
+		    <th>Oil type</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+		</tr>  
+    	<tr th:each = "oil : ${oils}">
+    		<td th:text="${oil.name}"></td>
+    		<td th:text="${oil.manufacturer}"></td>
+    		<td th:text="${oil.volume}"></td>
+    		<td th:text="${oil.countryOfOrigin}"></td>
+    		<td th:text="${oil.rate}"></td>
+    		<td th:text="${oil.commentary}"></td>
+    		<td th:text="${oil.oilType.name}"></td>
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${oil.id})}" class="btn btn-danger">Delete</a></td>
+ 			<td><a th:href="@{/edit/{id}(id=${oil.id})}" class="btn btn-success">Edit</a></td>
+    	</tr>
+     </table>
+	 <a href="/add" class="btn btn-success">Add cooking oil</a>
+</body>
+</html>

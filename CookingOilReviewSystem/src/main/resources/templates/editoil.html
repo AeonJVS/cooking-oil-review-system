@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of cooking oils</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body style="background-color: #171717; color: whitesmoke; background-image: url(/img/backgroundPhoto.png);">
+	<h1>Edit cooking oil</h1>
+	<div>
+		<form th:object="${oil}" th:action="@{../save}" action="#" method="post">
+			<label for="id"></label>
+			<input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="name">Name</label>
+			<input type="text" id="name" th:field="*{name}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		  	<label for="manufacturer">Manufacturer</label>
+			<input type="text" id="manufacturer" th:field="*{manufacturer}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="volume">Volume</label>
+			<input type="text" id="volume" th:field="*{volume}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		  	<label for="countryOfOrigin">Country of Origin</label>
+			<input type="text" th:field="*{countryOfOrigin}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="rate">Rate</label>
+			<input type="text" id="rate" th:field="*{rate}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="commentary">Commentary</label>
+			<input type="text" id="commentary" th:field="*{commentary}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="oiltypelist">Oil Type</label>
+			<select id="oiltypelist" th:field="*{oilType}" class="form-control"> <option th:each="oilType: ${oilTypes}" th:value="${oilType.typeId}"
+			 th:text="${oilType.name}"></option>
+			</select>
+            
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
